@@ -15,6 +15,6 @@
         <input type="number" name="rate" id="rate" value="{{ $menu['rate'] }}" required>
         <label for="price">Price:</label>
         <input type="number" name="price" id="price" value="{{ $menu['price'] }}" required>
-        <button type="submit">Update Menu</button>
+        <button type="submit">Update Menu 11</button>
     </form>
 @endsection 
