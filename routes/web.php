@@ -24,3 +24,5 @@ Route::post('/menu', [MenuController::class, 'store'])->name('menu.store');
 Route::get('/menu/{id}/edit', [MenuController::class, 'edit'])->name('menu.edit');
 Route::put('/menu/{id}', [MenuController::class, 'update'])->name('menu.update');
 Route::delete('/menu/{id}', [MenuController::class, 'destroy'])->name('menu.destroy');
+Route::post('/menu/upload-image', [MenuController::class, 'uploadImage']);
+Route::post('/menu/delete-image', [MenuController::class, 'deleteImage']);
