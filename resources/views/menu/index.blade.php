@@ -73,5 +73,9 @@
         </form>
     </div>
 </div>
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
+<script>
+    window.csrfToken = '{{ csrf_token() }}';
+</script>
 <script src="../js/menu.js"></script>
 @endsection

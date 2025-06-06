@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\MidtransController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,4 @@ Route::put('/menu/{id}', [MenuController::class, 'update'])->name('menu.update')
 Route::delete('/menu/{id}', [MenuController::class, 'destroy'])->name('menu.destroy');
 Route::post('/menu/upload-image', [MenuController::class, 'uploadImage']);
 Route::post('/menu/delete-image', [MenuController::class, 'deleteImage']);
+Route::post('/midtrans/get-snap-token', [MidtransController::class, 'getSnapToken']);

@@ -317,3 +317,50 @@ setupAddMenuButton();
 setEditModeUI();
 filterCategory(currentCategory);
 renderCart();
+
+document.addEventListener('DOMContentLoaded', function() {
+    const checkoutBtn = document.getElementById('checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', function() {
+            // Use the actual cart array for checkout
+            if (!cart.length) {
+                alert('Cart is empty!');
+                return;
+            }
+            fetch('/midtrans/get-snap-token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': window.csrfToken
+                },
+                body: JSON.stringify({
+                    cart: cart
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.snap_token) {
+                    window.snap.pay(data.snap_token, {
+                        onSuccess: function(result) {
+                            alert('Payment success!');
+                            cart = [];
+                            renderCart();
+                        },
+                        onPending: function(result) {
+                            alert('Payment pending!');
+                        },
+                        onError: function(result) {
+                            alert('Payment failed!');
+                        },
+                        onClose: function() {
+                            // User closed the popup
+                        }
+                    });
+                } else {
+                    alert('Failed to get Snap token');
+                }
+            })
+            .catch(() => alert('Checkout error'));
+        });
+    }
+});
