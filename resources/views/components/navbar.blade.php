@@ -4,8 +4,32 @@
             <span class="navbar-title" style="font-size: 2rem; font-weight: bold; color: #fff; letter-spacing: 1px;">Warkop Cashier</span>
             <span class="navbar-subtitle" style="font-size: 1.1rem; color: #b0b3c6; font-weight: 400;">Ryan</span>
         </div>
-        <a href="https://dashboard.sandbox.midtrans.com/beta/transactions" target="_blank" class="navbar-midtrans-btn" title="Go to Midtrans Dashboard" style="margin-left: 32px; padding: 10px 24px; background: linear-gradient(90deg,#2d9cdb,#1b6ca8); color: #fff; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 1.1rem; box-shadow: 0 2px 8px rgba(45,156,219,0.12); transition: background 0.2s; border: none; outline: none;">
-            Midtrans Dashboard
-        </a>
+        <div style="display: flex; align-items: center; gap: 16px;">
+            <a href="https://dashboard.sandbox.midtrans.com/beta/transactions" target="_blank" class="navbar-midtrans-btn" title="Go to Midtrans Dashboard" style="padding: 10px 24px; background: linear-gradient(90deg,#2d9cdb,#1b6ca8); color: #fff; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 1.1rem; box-shadow: 0 2px 8px rgba(45,156,219,0.12); transition: background 0.2s; border: none; outline: none;">
+                Midtrans Dashboard
+            </a>
+            <button id="logout-btn" style="padding: 10px 24px; background: #e74c3c; color: #fff; border-radius: 6px; border: none; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: background 0.2s;">Logout</button>
+        </div>
     </div>
 </nav>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.onclick = async function() {
+            try {
+                const res = await fetch('http://localhost:3000/user');
+                const user = await res.json();
+                await fetch('http://localhost:3000/user', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ...user, isLoggedIn: false })
+                });
+                window.location.href = '/login';
+            } catch (err) {
+                alert('Logout failed.');
+            }
+        };
+    }
+});
+</script>

@@ -305,7 +305,20 @@ async function fetchAndRenderMenu() {
 }
 
 // Remove all server-rendered menu items on page load and always render from JS
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async function() {
+    // Check login status on root (menu) page
+    if (window.location.pathname === '/' || window.location.pathname === '/menu') {
+        try {
+            const res = await fetch('http://localhost:3000/user');
+            const user = await res.json();
+            if (!user.isLoggedIn) {
+                window.location.href = '/login';
+                return;
+            }
+        } catch (err) {
+            // Optionally handle error
+        }
+    }
     const menuList = document.getElementById('menu-list');
     if (menuList) menuList.innerHTML = '';
     fetchAndRenderMenu();

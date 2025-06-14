@@ -15,10 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [MenuController::class, 'index'])->name('menu.index');
 Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
 Route::get('/menu/create', [MenuController::class, 'create'])->name('menu.create');
 Route::post('/menu', [MenuController::class, 'store'])->name('menu.store');
@@ -28,3 +25,6 @@ Route::delete('/menu/{id}', [MenuController::class, 'destroy'])->name('menu.dest
 Route::post('/menu/upload-image', [MenuController::class, 'uploadImage']);
 Route::post('/menu/delete-image', [MenuController::class, 'deleteImage']);
 Route::post('/midtrans/get-snap-token', [MidtransController::class, 'getSnapToken']);
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
