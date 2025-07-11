@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: loyalty59/warkopkasir-frontend:latest
+    image: loyalty59/warkop-kasir-frontend:latest
     container_name: warkopkasir-frontend-app
     restart: always
     volumes:
