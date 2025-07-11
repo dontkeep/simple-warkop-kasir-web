@@ -104,7 +104,7 @@ function setEditModeUI() {
     if (addBtn) addBtn.style.display = editMode ? '' : 'none';
     // Change edit mode button text
     const editBtn = document.getElementById('edit-mode-btn');
-    if (editBtn) editBtn.textContent = editMode ? 'Apply' : 'Edit Menu';
+    if (editBtn) editBtn.textContent = editMode ? 'Simpan' : 'Ubah Menu';
 }
 
 function setupEditModeButton() {
@@ -113,7 +113,7 @@ function setupEditModeButton() {
         editBtn = document.createElement('button');
         editBtn.id = 'edit-mode-btn';
         editBtn.className = 'edit-mode-btn';
-        editBtn.textContent = 'Edit Menu';
+        editBtn.textContent = 'Ubah Menu';
         const catSection = document.querySelector('.category-section');
         catSection.insertBefore(editBtn, catSection.firstChild);
     }
@@ -140,9 +140,9 @@ function openMenuModal(mode, idx = null) {
     if (mode === 'add') {
         form.reset();
         document.getElementById('modal-menu-id').value = '';
-        title.textContent = 'Add Menu';
+        title.textContent = 'Tambah Menu';
     } else if (mode === 'edit') {
-        title.textContent = 'Edit Menu';
+        title.textContent = 'Ubah Menu';
         // Populate fields with current menu item
         const card = document.querySelectorAll('.menu-item-card')[idx];
         document.getElementById('modal-menu-id').value = card.getAttribute('data-id') || '';
@@ -331,49 +331,3 @@ setEditModeUI();
 filterCategory(currentCategory);
 renderCart();
 
-document.addEventListener('DOMContentLoaded', function() {
-    const checkoutBtn = document.getElementById('checkout-btn');
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', function() {
-            // Use the actual cart array for checkout
-            if (!cart.length) {
-                alert('Cart is empty!');
-                return;
-            }
-            fetch('/midtrans/get-snap-token', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': window.csrfToken
-                },
-                body: JSON.stringify({
-                    cart: cart
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.snap_token) {
-                    window.snap.pay(data.snap_token, {
-                        onSuccess: function(result) {
-                            alert('Payment success!');
-                            cart = [];
-                            renderCart();
-                        },
-                        onPending: function(result) {
-                            alert('Payment pending!');
-                        },
-                        onError: function(result) {
-                            alert('Payment failed!');
-                        },
-                        onClose: function() {
-                            // User closed the popup
-                        }
-                    });
-                } else {
-                    alert('Failed to get Snap token');
-                }
-            })
-            .catch(() => alert('Checkout error'));
-        });
-    }
-});

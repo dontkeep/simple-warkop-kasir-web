@@ -1,0 +1,126 @@
+/* Add these styles */
+.menu-item-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-item-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.add-to-cart-hint {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 152, 0, 0.9);
+    color: white;
+    padding: 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-size: 12px;
+}
+
+.menu-item-card:hover .add-to-cart-hint {
+    bottom: 0;
+}
+
+/* QRIS Modal Styles */
+.qris-modal-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    position: relative;
+    text-align: center;
+}
+
+.qris-image-container {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.qris-image {
+    max-width: 300px;
+    height: auto;
+}
+
+.payment-instructions {
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+.payment-instructions .amount {
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.payment-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.payment-confirm-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.payment-confirm-btn:hover {
+    background-color: #45a049;
+}
+
+.payment-cancel-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.payment-cancel-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Modal Overlay */
+.menu-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+}
+

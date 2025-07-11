@@ -4,11 +4,11 @@
     <h1>Add New Menu</h1>
     <form action="{{ route('menu.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <label for="name">Name:</label>
+        <label for="name">Nama:</label>
         <input type="text" name="name" id="name" required>
-        <label for="desc">Description:</label>
+        <label for="desc">Deskripsi:</label>
         <input type="text" name="desc" id="desc" required>
-        <label for="img_file">Image Upload:</label>
+        <label for="img_file">Unggah Poto:</label>
         <input type="file" name="img_file" id="img_file" accept="image/*">
         <span style="font-size:0.9em; color:#888;">or enter image URL below</span>
         <input type="text" name="img" id="img" placeholder="Image URL">
