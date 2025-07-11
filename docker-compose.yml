@@ -5,6 +5,8 @@ services:
     image: loyalty59/warkop-kasir-frontend:latest
     container_name: warkopkasir-frontend-app
     restart: always
+    volumes:
+      - .:/app 
     # volumes:
     #   - app-data:/app  # ✅ This creates a named volume
 
@@ -16,6 +18,7 @@ services:
     ports:
       - "3011:80"
     volumes:
+      - .:/app 
       # - app-data:/app  # ✅ Same named volume so Nginx sees the files
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
     restart: always
