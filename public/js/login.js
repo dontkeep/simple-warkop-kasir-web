@@ -8,11 +8,11 @@ window.addEventListener('DOMContentLoaded', function() {
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
         try {
-            const res = await fetch('http://localhost:3000/user');
+            const res = await fetch('https://api.warkopkasir.web.id/user');
             const user = await res.json();
             if (user.email === email && user.password === password) {
                 // Update isLoggedIn to true
-                await fetch('http://localhost:3000/user', {
+                await fetch('https://api.warkopkasir.web.id/user', {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ ...user, isLoggedIn: true })

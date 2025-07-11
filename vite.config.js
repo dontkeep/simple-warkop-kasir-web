@@ -8,4 +8,8 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        host: true,
+        allowedHosts: ['localhost', 'warkopkasir.web.id', 'www.warkopkasir.web.id'],
+    },
 });

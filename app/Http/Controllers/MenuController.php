@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class MenuController extends Controller
 {
-    private $apiUrl = 'http://localhost:3000/menu-warkop';
+    private $apiUrl = 'https://api.warkopkasir.web.id/menu-warkop';
 
     public function index()
     {

@@ -187,7 +187,7 @@ async function handleDelete(idx) {
         imgFilename = img.split('/assets/image/')[1];
     }
     try {
-        const res = await fetch('http://localhost:3000/menu-warkop');
+        const res = await fetch('https://api.warkopkasir.web.id/menu-warkop');
         const menuData = await res.json();
         const item = menuData.find(i => i.name === name);
         if (!item) return alert('Item not found');
@@ -201,7 +201,7 @@ async function handleDelete(idx) {
             });
         }
         // 2. Delete menu item from json-server
-        const delRes = await fetch(`http://localhost:3000/menu-warkop/${item.id}`, { method: 'DELETE' });
+        const delRes = await fetch(`https://api.warkopkasir.web.id/menu-warkop/${item.id}`, { method: 'DELETE' });
         if (!delRes.ok) throw new Error('Failed to delete');
         await fetchAndRenderMenu();
     } catch (err) {
@@ -222,12 +222,12 @@ document.getElementById('menu-form').onsubmit = async function(e) {
     const imgInput = document.getElementById('modal-menu-img');
     let imgFilename = '';
     let method = 'POST';
-    let url = 'http://localhost:3000/menu-warkop';
+    let url = 'https://api.warkopkasir.web.id/menu-warkop';
     let isEdit = false;
     if (id !== '') {
         // Edit mode: use the json-server id directly
         isEdit = true;
-        url = `http://localhost:3000/menu-warkop/${id}`;
+        url = `https://api.warkopkasir.web.id/menu-warkop/${id}`;
         method = 'PUT';
         // Fetch the current item to get the old image filename if needed
         const res = await fetch(url);
@@ -279,7 +279,7 @@ document.getElementById('menu-form').onsubmit = async function(e) {
 // Fetch and render menu items dynamically from json-server API
 async function fetchAndRenderMenu() {
     try {
-        const res = await fetch('http://localhost:3000/menu-warkop');
+        const res = await fetch('https://api.warkopkasir.web.id/menu-warkop');
         if (!res.ok) throw new Error('Failed to fetch menu');
         const menuData = await res.json();
         const menuList = document.getElementById('menu-list');
@@ -309,7 +309,7 @@ window.addEventListener('DOMContentLoaded', async function() {
     // Check login status on root (menu) page
     if (window.location.pathname === '/' || window.location.pathname === '/menu') {
         try {
-            const res = await fetch('http://localhost:3000/user');
+            const res = await fetch('https://api.warkopkasir.web.id/user');
             const user = await res.json();
             if (!user.isLoggedIn) {
                 window.location.href = '/login';

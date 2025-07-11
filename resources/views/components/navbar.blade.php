@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (logoutBtn) {
         logoutBtn.onclick = async function() {
             try {
-                const res = await fetch('http://localhost:3000/user');
+                const res = await fetch('https://api.warkopkasir.web.id/user');
                 const user = await res.json();
-                await fetch('http://localhost:3000/user', {
+                await fetch('https://api.warkopkasir.web.id/user', {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ ...user, isLoggedIn: false })
