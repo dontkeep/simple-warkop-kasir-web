@@ -2,11 +2,9 @@ version: '3.8'
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - .:/app
+    image: loyalty59/warkopkasir-frontend:latest 
+    container_name: warkopkasir-frontend-app
+    restart: always
 
   webserver:
     image: nginx:alpine
@@ -16,5 +14,5 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - .:/app
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    restart: always
