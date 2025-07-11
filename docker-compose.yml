@@ -12,7 +12,7 @@ services:
     depends_on:
       - app
     ports:
-      - "8000:80"
+      - "3011:80"
     volumes:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
     restart: always
