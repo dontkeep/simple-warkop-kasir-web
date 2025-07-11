@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\MidtransController;
 use Illuminate\Support\Facades\Route;
 
 /*
