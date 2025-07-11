@@ -2,7 +2,6 @@ version: '3.8'
 
 services:
   app:
-    user: www-data
     image: loyalty59/warkopkasir-frontend:latest 
     container_name: warkopkasir-frontend-app
     restart: always
