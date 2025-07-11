@@ -33,10 +33,22 @@ COPY composer.json composer.lock ./
 # ✅ Always use lowercase for commands!
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader --no-scripts
 
-COPY . .
+COPY . /app
 
 RUN composer run-script post-autoload-dump
 
+RUN php artisan config:cache && \
+    php artisan route:cache && \
+    php artisan view:cache && \
+    php artisan storage:link
+
+RUN chown -R www-data:www-data /app \
+    && chmod -R 775 /app/storage /app/bootstrap/cache
+
 EXPOSE 9000
+
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
 
 CMD ["php-fpm"]

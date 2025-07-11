@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [MenuController::class, 'index'])->name('menu.index');
-Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
 Route::get('/menu/create', [MenuController::class, 'create'])->name('menu.create');
 Route::post('/menu', [MenuController::class, 'store'])->name('menu.store');
 Route::get('/menu/{id}/edit', [MenuController::class, 'edit'])->name('menu.edit');
