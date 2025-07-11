@@ -6,9 +6,7 @@ services:
     container_name: warkopkasir-frontend-app
     restart: always
     volumes:
-      - .:/app 
-    # volumes:
-    #   - app-data:/app  # ✅ This creates a named volume
+      - app-data:/app  # ✅ This creates a named volume
 
   webserver:
     image: nginx:alpine
@@ -18,8 +16,7 @@ services:
     ports:
       - "3011:80"
     volumes:
-      - .:/app 
-      # - app-data:/app  # ✅ Same named volume so Nginx sees the files
+      - app-data:/app  # ✅ Same named volume so Nginx sees the files
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
     restart: always
 
