@@ -2,26 +2,32 @@ version: '3.8'
 
 services:
   app:
-    image: loyalty59/warkop-kasir-frontend:1.0.1
-    container_name: warkopkasir-frontend-app
-    restart: always
-    # depends_on:
-    #   - init-app
-    # volumes:
-    #   - app-data:/app
+    build: .
+    container_name: warkopkasir-app
+    restart: unless-stopped
+    volumes:
+      - .:/app
+      - ./storage:/app/storage
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+    networks:
+      - app-network
 
   webserver:
     image: nginx:alpine
-    container_name: nginx
-    depends_on:
-      - app
+    container_name: warkopkasir-webserver
+    restart: unless-stopped
     ports:
       - "3011:80"
     volumes:
-      # - app-data:/app
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
-      - ./ :/app:ro
-    restart: always
+      - ./public:/app/public:ro
+    depends_on:
+      - app
+    networks:
+      - app-network
 
-# volumes:
-#   app-data:
+networks:
+  app-network:
+    driver: bridge
