@@ -1,23 +1,14 @@
 version: '3.8'
 
 services:
-  init-app:
-    image: loyalty59/warkop-kasir-frontend:1.0.1
-    entrypoint: ""
-    command: sh -c "cp -rT /image-app /data"
-    working_dir: /
-    volumes:
-      - app-data:/data         # the named volume
-      - /app:/image-app:ro     # the built image files
-
   app:
     image: loyalty59/warkop-kasir-frontend:1.0.1
     container_name: warkopkasir-frontend-app
     restart: always
-    depends_on:
-      - init-app
-    volumes:
-      - app-data:/app
+    # depends_on:
+    #   - init-app
+    # volumes:
+    #   - app-data:/app
 
   webserver:
     image: nginx:alpine
@@ -27,9 +18,9 @@ services:
     ports:
       - "3011:80"
     volumes:
-      - app-data:/app
+      # - app-data:/app
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
     restart: always
 
-volumes:
-  app-data:
+# volumes:
+#   app-data:
