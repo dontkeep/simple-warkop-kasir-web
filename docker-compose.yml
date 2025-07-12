@@ -2,32 +2,23 @@ version: '3.8'
 
 services:
   app:
-    build: .
-    container_name: warkopkasir-app
-    restart: unless-stopped
+    image: loyalty59/warkop-kasir-frontend:1.0.1
+    container_name: warkopkasir-frontend-app
+    restart: always
     volumes:
-      - .:/app
-      - ./storage:/app/storage
-    environment:
-      - APP_ENV=local
-      - APP_DEBUG=true
-    networks:
-      - app-network
+      - app-data:/app  # ✅ This creates a named volume
 
   webserver:
     image: nginx:alpine
-    container_name: warkopkasir-webserver
-    restart: unless-stopped
+    container_name: nginx
+    depends_on:
+      - app
     ports:
       - "3011:80"
     volumes:
+      - app-data:/app  # ✅ Same named volume so Nginx sees the files
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
-      - ./public:/app/public:ro
-    depends_on:
-      - app
-    networks:
-      - app-network
+    restart: always
 
-networks:
-  app-network:
-    driver: bridge
+volumes:
+  app-data:
