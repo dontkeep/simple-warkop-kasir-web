@@ -20,6 +20,7 @@ services:
     volumes:
       # - app-data:/app
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./ :/app:ro
     restart: always
 
 # volumes:
