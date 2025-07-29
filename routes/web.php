@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\DetailTransaksiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,3 +27,10 @@ Route::post('/menu/delete-image', [MenuController::class, 'deleteImage']);
 Route::get('/login', function () {
     return view('login');
 })->name('login');
+
+Route::get('/transaksi', [TransaksiController::class, 'index']);
+Route::post('/transaksi', [TransaksiController::class, 'store']);
+
+Route::post('/test-post', function () {
+    return response()->json(['success' => true]);
+});

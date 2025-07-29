@@ -40,7 +40,8 @@ RUN composer run-script post-autoload-dump
 RUN php artisan config:cache && \
     php artisan route:cache && \
     php artisan view:cache && \
-    php artisan storage:link
+    php artisan storage:link && \
+    php artisan migrate --force
 
 RUN chown -R www-data:www-data /app \
     && chmod -R 775 /app/storage /app/bootstrap/cache
